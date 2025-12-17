@@ -1,3 +1,9 @@
+![Python](https://img.shields.io/badge/Python-3.9+-blue.svg)
+![scikit-learn](https://img.shields.io/badge/scikit--learn-ML-orange)
+![Status](https://img.shields.io/badge/Status-Complete-brightgreen)
+![License](https://img.shields.io/badge/License-MIT-lightgrey)
+![ML](https://img.shields.io/badge/Machine%20Learning-Classification-purple)
+
 🏦 Bank Loan Default Prediction — Machine Learning Project
 An end-to-end machine learning pipeline to predict bank loan default risk, using structured financial data and modern ML practices.
 The project compares:
