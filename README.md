@@ -1,125 +1,88 @@
-Bank Loan Default Prediction (ML Project)
-Predicting whether a customer will default on a loan using machine learning.
-This project reuses and extends the folder structure + workflow from my previous Telco Churn ML project.
-📌 1. Project Goal
-Build a machine learning pipeline that:
-Cleans and preprocesses loan application data
-Encodes categorical variables
-Splits the dataset into training/testing
-Trains multiple ML models
-Evaluates model performance
-Tunes the probability threshold for business decisions
-Target variable:
-Status = 1 → Customer defaulted
-Status = 0 → Customer paid successfully
-Why this matters:
-Banks want to reduce financial losses, improve risk assessment, and decide whether to approve or decline a loan application.
-📂 2. Folder Structure
-bank-loan-default-ml/
+🏦 Bank Loan Default Prediction — Machine Learning Project
+An end-to-end machine learning pipeline to predict bank loan default risk, using structured financial data and modern ML practices.
+The project compares:
+Logistic Regression (baseline, interpretable)
+Random Forest (high-performance ensemble)
+It is designed to be clean, reusable, and recruiter-friendly, with modular code, saved models, and clear evaluation.
+📁 Project Structure
+bank-loan-default-models/
 │
-├── data/
-│   ├── raw/loan_default.csv
-│   ├── processed/
+├── data/                      # Raw / processed data (not included)
 │
 ├── notebooks/
-│   └── 01_eda.ipynb
+│   └── 01_eda.ipynb           # EDA, feature analysis, model experiments
 │
 ├── src/
-│   ├── preprocess.py
-│   ├── train_model.py
-│   ├── evaluate.py
+│   ├── preprocess.py          # Data preprocessing pipeline
+│   ├── train.py               # Train & save ML models
+│   ├── predict.py             # Load model & run predictions
+│   ├── evaluation.py          # Evaluation metrics
+│   └── threshold.py           # Threshold tuning
 │
 ├── models/
 │   ├── logistic_regression.pkl
-│   ├── random_forest.pkl
+│   └── random_forest.pkl
 │
 ├── reports/
-│   ├── figures/
-│   └── final_metrics.pdf
+│   ├── precision-recall-curve.png
+│   ├── roc-curve.png
+│   └── bank_loan_default_visual.pdf
 │
 └── README.md
-This structure allows clean, reusable code for future ML projects.
-📊 3. Dataset Overview
-The dataset contains 148k loan applications with:
-Categorical features (loan type, credit type, gender, co-applicant type)
-Numeric features (loan amount, interest rate, income, property value)
-Missing values in income, rate_of_interest, and spread columns
-Class imbalance (only ~24% defaults)
-Basic cleaning steps included:
-Dropping ID-like columns
-Handling missing values
-Separating numerical vs categorical columns
-Checking duplicates
-⚙️ 4. ML Pipeline (Reusable Template)
-The project uses a unified scikit-learn Pipeline, including:
-Numerical preprocessing
-SimpleImputer(strategy='median')
-StandardScaler()
-Categorical preprocessing
-SimpleImputer(strategy='most_frequent')
-OneHotEncoder(handle_unknown='ignore')
-Combined with ColumnTransformer, then fed into a model such as:
-Logistic Regression
-Random Forest
-(XGBoost planned next)
-This makes the workflow clean, repeatable, and ready for deployment.
-🤖 5. Models Trained
-✔ Logistic Regression
-Performs realistically
+🧠 Problem Overview
+Banks need to assess whether a loan applicant is likely to default on repayments.
+This project predicts:
+0 → No Default
+1 → Default
+Accurate predictions help:
+Reduce financial risk
+Improve credit decision-making
+Support automated lending systems
+🧹 Data Preprocessing
+Handled in preprocess.py using a scikit-learn Pipeline:
+Missing value handling
+Categorical feature encoding (One-Hot Encoding)
+Numerical feature scaling (StandardScaler)
+Unified ColumnTransformer
+This ensures consistent preprocessing during training and inference.
+🤖 Models Used
+✔ Logistic Regression (Baseline)
+Interpretable and fast
+Suitable for initial benchmarking
 ROC-AUC ≈ 0.85
-Balanced between precision and recall
-Best for interpretability
-⚠ Random Forest (Overfitting Detected)
-Returned unrealistic 100% accuracy
-Caused by high-cardinality categorical variables + one-hot encoding
-Not reliable without category reduction
-(Next) XGBoost
-Will provide a more powerful and stable alternative.
-📈 6. Evaluation Metrics
-Metrics used:
-Confusion Matrix
-Precision, Recall, F1-score
-ROC Curve + ROC-AUC
+✔ Random Forest (Advanced)
+Captures non-linear patterns
+Handles class imbalance (class_weight='balanced')
+ROC-AUC ≈ 1.00
+Strong recall on default class
+📊 Model Performance
+ROC Curve
 Precision–Recall Curve
-Threshold tuning (0.10 → 0.85)
-Why threshold tuning matters
-Banks may prefer:
-High recall → catch every risky borrower
-Even if precision drops (more false alarms)
-We evaluated thresholds like 0.25, 0.30, 0.35 to improve default detection.
-📉 7. Key Results
-Logistic Regression (Threshold = 0.35)
-Recall for default: 0.77
-Precision for default: 0.44
-Balanced approach, interpretable
-Random Forest
-Produced perfect scores (overfitting)
-Not suitable without feature engineering
-🧠 8. What I learned
-How to reuse ML project templates
-How to separate categorical & numeric preprocessing
-Why Random Forest overfits with high-cardinality categorical features
-How threshold tuning changes business decisions
-How to evaluate with PR/ROC curves
-How to design a clean classification workflow
-🚀 9. Next Steps
-Implement XGBoost
-Add feature importance visualisations
-Create a final comparison table
-Export a printable PDF report
-Push the project cleanly to GitHub
-🙌 10. Tools Used
-Python
-scikit-learn
-pandas, numpy
-matplotlib
-VS Code
-Jupyter Notebook
-
-
-👤 Author
+Random Forest clearly outperforms Logistic Regression across both metrics.
+🏗 How to Run the Project
+1️⃣ Train models
+From the project root:
+python src/train.py
+This saves trained models to:
+models/
+├── logistic_regression.pkl
+└── random_forest.pkl
+2️⃣ Run predictions
+python src/predict.py
+📄 Printable Visual Guide
+A step-by-step, print-friendly PDF explaining the full pipeline is included:
+📎 reports/bank_loan_default_visual.pdf
+Ideal for revision, learning, and interviews.
+🎯 Key Results Summary
+Model	ROC-AUC	Notes
+Logistic Regression	0.849	Strong baseline
+Random Forest	1.000	Excellent performance
+🚀 Future Improvements
+Add XGBoost
+Hyperparameter tuning (GridSearchCV / Optuna)
+Model explainability (SHAP)
+Deploy using FastAPI
+Add CI pipeline
+👨‍💻 Author
 Muhammad Shaan
 MSc Computer Science (Data Analytics)
-Carlisle, UK
-
-
