@@ -5,6 +5,18 @@
 ![ML](https://img.shields.io/badge/Machine%20Learning-Classification-purple)
 
 🏦 Bank Loan Default Prediction — Machine Learning Project
+## 🔍 Why This Project Matters
+
+This project demonstrates how machine learning can be applied to **real-world financial risk assessment**, covering the **full ML lifecycle**:
+
+- Data preprocessing using pipelines
+- Baseline vs advanced model comparison
+- Threshold tuning for business impact
+- Model persistence and reproducibility
+- Clear evaluation using ROC-AUC and Precision–Recall
+
+The codebase is structured for **reuse in future ML projects** and follows production-style practices.
+
 An end-to-end machine learning pipeline to predict bank loan default risk, using structured financial data and modern ML practices.
 The project compares:
 Logistic Regression (baseline, interpretable)
